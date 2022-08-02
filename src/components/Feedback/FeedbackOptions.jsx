@@ -10,8 +10,8 @@ export default function Feedback({ options, onLeaveFeedback }) {
     return (
         <div>
             <FeedbackButtonsList>
-                {Object.entries(options).map(([type]) => (
-                <ButtonItem key={shortid.generate()}><Button onClick={onLeaveFeedback}>{type}</Button></ButtonItem>
+                {options.map(option => (
+                    <ButtonItem key={shortid.generate()}><Button onClick={() => { onLeaveFeedback(option) }}>{option}</Button></ButtonItem>
                 ))}
             </FeedbackButtonsList> 
         </div>
@@ -20,10 +20,6 @@ export default function Feedback({ options, onLeaveFeedback }) {
 };
 
 Feedback.propTypes = {
-    options: PropTypes.exact({
-        good: PropTypes.number,
-        neutral: PropTypes.number,
-        bad: PropTypes.number,
-    })
+    options: PropTypes.array
 }
 

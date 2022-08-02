@@ -32,40 +32,20 @@ export class App extends Component {
     }
   }
 
-  onLeaveFeedback = (e) => {
-    const buttonName = e.currentTarget.textContent;
-
-    if (buttonName === 'good') {
-      this.setState((prevState) => {
-        return {
-          good: prevState.good + 1,
-        }
-      })
-    }
-
-    if (buttonName === 'neutral') {
-      this.setState((prevState) => {
-        return {
-          neutral: prevState.neutral + 1,
-        }
-      })
-    }
-
-    if (buttonName === 'bad') {
-      this.setState((prevState) => {
-        return {
-          bad: prevState.bad + 1,
-        }
-      })
-    }
+  onLeaveFeedback = (key) => {
+    this.setState(prevState => ({
+      [key]: prevState[key] + 1,
+    }));
   }
 
   render() {
+    const options = Object.keys(this.state);
+
     return (
       <>
         <Section title='Please leave feedback'>
           <FeedbackOptions
-            options={this.state}
+            options={options}
             onLeaveFeedback={this.onLeaveFeedback} />
 
           {this.countTotalFeedback() === 0 ? (
